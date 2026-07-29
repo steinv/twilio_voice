@@ -666,12 +666,11 @@ class TVConnectionService : ConnectionService() {
         }
 
 
-        // Set call disconnected listener, removes connection from active connections when call is disconnected
+        // Set call disconnected listener, removes connection from active connections when call is disconnected.
         val onCallInitializingDisconnectedListener: CompletionHandler<DisconnectCause> = CompletionHandler {
-            connection.twilioCall?.let {
-                sendBroadcastEvent(applicationContext, TVBroadcastReceiver.ACTION_CALL_ENDED, it.sid ?: "", connection.extras)
-                onConnectionEnded(it.sid)
-            }
+            val sid = connection.twilioCall?.sid
+            sendBroadcastEvent(applicationContext, TVBroadcastReceiver.ACTION_CALL_ENDED, sid ?: "", connection.extras)
+            onConnectionEnded(sid)
         }
 
         // NOTE(cybex-dev): This could be used as an alternative to the [onCallInitializingDisconnectedListener],
