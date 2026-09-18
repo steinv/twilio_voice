@@ -19,4 +19,5 @@ enum CallEvent {
   answer,
   missedCall,
   returningCall,
+  twilioApplicationNotFound,
 }

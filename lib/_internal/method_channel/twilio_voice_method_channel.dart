@@ -383,6 +383,13 @@ class MethodChannelTwilioVoice extends TwilioVoicePlatform {
         call.clearQualityWarnings();
         return CallEvent.declined;
       }
+      else if (tokens[1].contains("31001")) {
+        // https://www.twilio.com/docs/api/errors/31001 Application not found
+        call.activeCall = null;
+        call.clearQualityWarnings();
+        return CallEvent.twilioApplicationNotFound;
+      }
+
       return CallEvent.log;
     } else if (state.startsWith("Connected|")) {
       call.activeCall = createCallFromState(state, initiated: true);
