@@ -81,6 +81,7 @@ class _CallControlsState extends State<CallControls> {
         case CallEvent.callEnded:
         case CallEvent.missedCall:
         case CallEvent.returningCall:
+        case CallEvent.twilioApplicationNotFound:
         case CallEvent.log:
           _updateState();
           break;
